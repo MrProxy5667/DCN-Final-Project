@@ -1,0 +1,27 @@
+Testing methods for part 3:
+1. Execute java -jar FloodlightWithApps.jar -cf shortestPathSwitching.prop;
+   This will use shortest path switching to configure the project, so that nothing else can disrupt the experiment;
+
+2. Start mininet using sudo ./run_mininet.py $topo$;
+   $topo$ can be chosen from single, linear, tree, mesh, assign1, someloops;
+
+3. When all hosts are ARPed in mininet, enter pingall to test the reachability among hosts;
+   If all packets are successfully received, then the topology of the network and the forwarding rules in switches are correct.
+
+4. link $dev1$ $dev2$ down / up can also be used to change the network topology to test results. Once topology is changed, you can 
+   also run pingall to test reachability after re-calculation of topology and paths.
+
+
+
+
+Testing method for part 4:
+1. Execute java -jar FloodlightWithApps.jar -cf loadbalancer.prop;
+   This will use the load balancer as well as the shortest path switching in part 3 to configure the project;
+
+2. Use steps for testing part 3 to test the reachability of hosts;
+   This is to check if the default matching rule (to go to shortest path table for forwarding) is correct;
+
+3. When pingall successfully returned, enter:
+       $somehost$ curl $virtualIP$
+   $somehost$ can be any host currently in mininet; the legal values of virtualIP is given in the configure file loadbalancer.prop.
+   If this curl can return successfully, then the functionality of this part's ARP and TCP handling are successfully implemented.
